@@ -20,7 +20,7 @@ apply {
 group = "fr.customentity"
 version = "0.0.1"
 application {
-    mainClass.set("fr.customentity.ApplicationKt")
+    mainClass.set("fr.customentity.launcher.LauncherKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
