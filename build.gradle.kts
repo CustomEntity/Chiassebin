@@ -20,7 +20,7 @@ apply {
 group = "fr.customentity"
 version = "0.0.1"
 application {
-    mainClass.set("fr.customentity.launcher.LauncherKt")
+    mainClass.set("fr.chiassebin.launcher.LauncherKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -36,6 +36,9 @@ repositories {
 }
 
 dependencies {
+
+    // Aws dependencies
+    implementation("aws.sdk.kotlin:s3:0.18.0-beta")
 
     // Koin dependencies
     implementation("io.insert-koin:koin-core:$koinVersion")
@@ -54,6 +57,7 @@ dependencies {
 
 
     // Ktor dependencies
+    implementation("io.ktor:ktor-server-request-validation:$ktorVersion")
     implementation("io.ktor:ktor-client-core-jvm:2.2.3")
     implementation("io.ktor:ktor-client-apache-jvm:2.2.3")
     implementation("io.ktor:ktor-server-sessions:$ktorVersion")

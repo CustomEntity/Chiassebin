@@ -1,5 +1,6 @@
 package fr.chiassebin.web
 
+import fr.chiassebin.web.controllers.PasteController
 import fr.chiassebin.web.controllers.UserController
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -11,6 +12,24 @@ import org.koin.ktor.ext.inject
 fun Routing.router() {
     authRoute()
     userRoute()
+    pasteRoute()
+}
+
+fun Routing.pasteRoute() {
+    val userController by inject<UserController>()
+    val pasteController by inject<PasteController>()
+
+    route("/paste") {
+        get("/{id}") {
+            pasteController.getPasteContentById(call)
+        }
+        get("/{id}/info") {
+            pasteController.findPasteInfoById(call)
+        }
+        post {
+            pasteController.postPaste(call)
+        }
+    }
 }
 
 fun Routing.authRoute() {

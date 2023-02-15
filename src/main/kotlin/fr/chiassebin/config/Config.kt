@@ -28,5 +28,8 @@ object Config {
     val SCYLLA_PORT: Int = env["SCYLLA_PORT"]?.toInt() ?: 9042
     val SCYLLA_USER: String = env["SCYLLA_USER"] ?: "cassandra"
     val SCYLLA_PASSWORD: String = env["SCYLLA_PASSWORD"] ?: "cassandra"
-    val SCYLLA_DEFAULT_KEYSPACE: String = env["SCLLA_DEFAULT_KEYSPACE"] ?: "kettl"
+    val SCYLLA_DEFAULT_KEYSPACE: String = env["SCYLLA_DEFAULT_KEYSPACE"] ?: "kettl"
+    val AWS_ENDPOINT: String = env["AWS_ENDPOINT"] ?: "https://s3.tebi.io"
+    val AWS_REGION: String = env["AWS_REGION"] ?: "global"
+    val AWS_BUCKET_NAME: String = env["AWS_BUCKET_NAME"] ?: "chiassebin"
 }

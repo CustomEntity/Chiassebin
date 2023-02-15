@@ -21,7 +21,7 @@ class ScyllaDBGateway : ScyllaGateway {
     override fun init() {
         try {
             this.cqlSession = CqlSession.builder()
-                .addContactPoint(InetSocketAddress(Config.SCYLLA_HOST, Config.SCYLLA_PORT))
+                //.addContactPoint(InetSocketAddress(Config.SCYLLA_HOST, Config.SCYLLA_PORT))
                 .withAuthCredentials(Config.SCYLLA_USER, Config.SCYLLA_PASSWORD)
                 .addTypeCodecs(
                     SnowflakeTypeCodec()
@@ -36,8 +36,12 @@ class ScyllaDBGateway : ScyllaGateway {
     }
 
     override fun start() {
-        val stmt: PreparedStatement = this.cqlSession.prepare("CREATE KEYSPACE IF NOT EXISTS chiassebin WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};")
+        val stmt: PreparedStatement =
+            this.cqlSession.prepare("CREATE KEYSPACE IF NOT EXISTS chiassebin WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};")
+        val stmt2: PreparedStatement =
+            this.cqlSession.prepare("CREATE TABLE IF NOT EXISTS chiassebin.pastes (id TEXT PRIMARY KEY, file_name TEXT, file_size INT, bucket_key TEXT, password TEXT, syntax_highlight SMALLINT, tags set<TEXT>, created_at TIMESTAMP, expires_at TIMESTAMP);")
         this.cqlSession.execute(stmt.bind())
+        this.cqlSession.execute(stmt2.bind())
     }
 
     override fun getSession(): CqlSession {
